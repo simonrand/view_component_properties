@@ -1,5 +1,7 @@
-require "action_view"
-require "active_support/dependencies/autoload"
+# frozen_string_literal: true
+
+require 'action_view'
+require 'active_support/dependencies/autoload'
 
 module ViewComponentProperties
   extend ActiveSupport::Autoload

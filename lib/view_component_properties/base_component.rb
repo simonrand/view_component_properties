@@ -1,4 +1,7 @@
+# frozen_string_literal: true
+
 module ViewComponentProperties
+  # TODO: Docs
   class BaseComponent < ViewComponent::Base
     def initialize(params = {})
       property_params(params).each do |key, value|
@@ -33,7 +36,7 @@ module ViewComponentProperties
     end
 
     def property_modules
-      self.class.ancestors.take_while {|a| a != Properties::Base } & self.class.included_modules
+      self.class.ancestors.take_while { |a| a != Properties::Base } & self.class.included_modules
     end
 
     def property_params(params)
