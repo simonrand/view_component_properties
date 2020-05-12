@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
-$LOAD_PATH.unshift File.expand_path('../lib', __dir__)
-require 'view_component_properties'
-
+require 'bundler/setup'
 require 'minitest/autorun'
+
+# Configure Rails Environment
+ENV['RAILS_ENV'] = 'test'
+
+require File.expand_path('config/environment.rb', __dir__)
+require 'view_component/test_case'

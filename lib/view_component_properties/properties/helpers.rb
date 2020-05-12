@@ -2,7 +2,6 @@
 
 module ViewComponentProperties
   module Properties
-    # TODO: Docs
     class Helpers
       class << self
         def property_name_from_module(mod)
