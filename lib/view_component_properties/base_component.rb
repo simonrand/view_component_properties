@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
+require 'view_component'
+
 module ViewComponentProperties
-  # TODO: Docs
+  # BaseComponent wraps ViewComponent::Base, including defining a default
+  # `call` method, which provides full support for properties for simple
+  # single tag components.
   class BaseComponent < ViewComponent::Base
     def initialize(params = {})
       property_params(params).each do |key, value|
@@ -10,16 +14,26 @@ module ViewComponentProperties
     end
 
     def call
-      content_tag tag, class: (specified_classes + property_classes).compact do
+      content_tag tag_name, attrs do
         content
       end
     end
 
     private
 
+    def attrs
+      attrs = {}
+      attrs[:class] = classes if classes.any?
+      attrs
+    end
+
+    def classes
+      @classes ||= (specified_classes + property_classes).compact
+    end
+
     def included_properties
       @included_properties ||= property_modules.select do |mod|
-        mod.parents[-2] == ::Properties && mod != ViewComponentProperties::Properties::Base
+        mod.module_parents[-2] == ::Properties && mod != ViewComponentProperties::Properties::Base
       end
     end
 
@@ -47,7 +61,7 @@ module ViewComponentProperties
       []
     end
 
-    def tag
+    def tag_name
       :div
     end
   end

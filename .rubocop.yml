@@ -5,3 +5,6 @@ Layout/LineLength:
 
 Style/Documentation:
   Enabled: false
+
+Rails/ApplicationController:
+  Enabled: false
