@@ -54,7 +54,7 @@ end
 
 `ViewComponentProperties::BaseComponent` implements an inline template which simply returns our content wrapped in the defined `tag_name`, so using our `ExampleComponent` above:
 
-```ruby
+```erb
 <%= render(ExampleComponent.new) do %>
   Hello, World!
 <% end %>
@@ -101,7 +101,7 @@ end
 
 Now we can apply our property to the component:
 
-```ruby
+```erb
 <%= render(ExampleComponent.new(margin_bottom: 2)) do %>
   Hello, World!
 <% end %>
@@ -125,7 +125,7 @@ class ExampleComponent < ApplicationComponent
 end
 ```
 
-```ruby
+```erb
 <%= render(ExampleComponent.new(margin_bottom: { default: 2, lg: 4 })) do %>
   Hello, World!
 <% end %>
@@ -151,7 +151,7 @@ end
 
 Now we can apply our property to the component:
 
-```ruby
+```erb
 <%= render(ExampleComponent.new(margin_bottom: 1)) do %>
   Hello, World!
 <% end %>
@@ -165,16 +165,22 @@ Returning:
 
 However, for non-production environments it would be recommended that you raise an error on invalid property values, you can do this by setting the `raise_error_for_invalid_property_values` configuration option to true:
 
-Now we can apply our property to the component:
-
 ```ruby
 ViewComponentProperties.config.raise_error_for_invalid_property_values = true
+```
 
+No when we provide an invalid property value:
+
+```erb
 <%= render(ExampleComponent.new(margin_bottom: 1)) do %>
   Hello, World!
 <% end %>
+```
 
-# `margin_bottom: 1` will raise with ViewComponentProperties::PropertyError
+This will raise with:
+
+```
+ViewComponentProperties::PropertyError
 ```
 
 It is **not** recommended to raise exceptions in production environments.
