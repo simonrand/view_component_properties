@@ -32,10 +32,11 @@ module ViewComponentProperties
     end
 
     def included_properties
-      # TODO: Module#parents has been deprecated in Rails > 5, we should use
-      #       Module#module_parents for those versions.
       @included_properties ||= property_modules.select do |mod|
-        mod.parents[-2] == ::Properties && mod != ViewComponentProperties::Properties::Base
+        # Module#parents will be removed in Rails 6.1,
+        # but .module_parents does not exist in versions < 6.1
+        parents = mod.respond_to?(:module_parents) ? mod.module_parents : mod.parents
+        parents[-2] == ::Properties && mod != ViewComponentProperties::Properties::Base
       end
     end
 
