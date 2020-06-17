@@ -7,6 +7,14 @@ module ViewComponentProperties
   # `call` method, which provides full support for properties for simple
   # single tag components.
   class BaseComponent < ViewComponent::Base
+    class << self
+      def properties(*properties)
+        properties.each do |property|
+          include "Properties::#{property.to_s.split('_').map(&:titlecase).join('::')}".constantize
+        end
+      end
+    end
+
     def initialize(params = {})
       property_params(params).each do |key, value|
         instance_variable_set("@#{key}", value)
