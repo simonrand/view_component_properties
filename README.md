@@ -89,13 +89,14 @@ end
 
 The path and module name defines the parameter name which will set the property on a component, so in the case of our margin bottom property, the parameter name will be `margin_bottom`.
 
-Include our property on our `ExampleComponent`
+Add our property to our `ExampleComponent` by adding the parameter name the `properties` class method.
 
 `app/components/example_component.rb`:
 
 ```ruby
 class ExampleComponent < ApplicationComponent
-  include Properties::Margin::Bottom
+  # NOTE: You can include multiple properties here, for example `properties :margin_bottom, :margin_top`
+  properties :margin_bottom
 end
 ```
 
@@ -121,7 +122,7 @@ Responsive properties (again following Tailwind CSS conventions) are supported b
 
 ```ruby
 class ExampleComponent < ApplicationComponent
-  include Properties::Margin::Bottom # as per the "Adding a margin bottom property to a component" example above
+  properties :margin_bottom # as per the "Adding a margin bottom property to a component" example above
 end
 ```
 
@@ -145,7 +146,7 @@ By default passing invalid property values to will result in no class being retu
 
 ```ruby
 class ExampleComponent < ApplicationComponent
-  include Properties::Margin::Bottom # as per the "Adding a margin bottom property to a component" example above
+  properties :margin_bottom # as per the "Adding a margin bottom property to a component" example above
 end
 ```
 
