@@ -22,7 +22,7 @@ module ViewComponentProperties
 
           # Define the property_name_classes method
           def #{property_name + '_classes'}
-            return unless @#{property_name}
+            return unless defined? @#{property_name}
 
             if @#{property_name}.is_a?(Hash)
               return build_responsive_class_value(@#{property_name}, ::#{klass}::CLASSES, '#{klass}')
